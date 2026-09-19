@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PowerX | AC Motor Fault Diagnosis</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">
+            <h1>PowerX</h1>
+            <p>Industrial AC Motor Fault Diagnosis</p>
+        </div>
+
+        <div class="motor-info">
+            <span>MOTOR ID</span>
+            <strong>MTR-001</strong>
+            <span class="data-mode-label">DATA MODE</span>
+            <strong id="dataMode">LIVE</strong>
+        </div>
+    </header>
+
+
+    <!-- MAIN STATUS -->
+    <section class="status-section">
+
+        <div class="status-icon" id="statusIcon">●</div>
+
+        <div>
+            <p class="small-title">MOTOR STATUS</p>
+
+            <h2 id="motorStatus">NORMAL</h2>
+
+            <p id="statusMessage">
+                Motor is operating normally
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- SENSOR CARDS -->
+    <section class="sensor-grid">
+
+        <div class="sensor-card">
+            <div class="sensor-title">⚡ VOLTAGE</div>
+            <div class="sensor-value">
+                <span id="voltage">230</span> V
+            </div>
+            <div class="sensor-state" id="voltageState">NORMAL</div>
+        </div>
+
+
+        <div class="sensor-card">
+            <div class="sensor-title">🔌 CURRENT</div>
+            <div class="sensor-value">
+                <span id="current">5.2</span> A
+            </div>
+            <div class="sensor-state" id="currentState">NORMAL</div>
+        </div>
+
+
+        <div class="sensor-card">
+            <div class="sensor-title">🌡 TEMPERATURE</div>
+            <div class="sensor-value">
+                <span id="temperature">57</span> °C
+            </div>
+            <div class="sensor-state" id="temperatureState">NORMAL</div>
+        </div>
+
+
+        <div class="sensor-card">
+            <div class="sensor-title">📳 VIBRATION</div>
+            <div class="sensor-value">
+                <span id="vibration">0.32</span> g
+            </div>
+            <div class="sensor-state" id="vibrationState">NORMAL</div>
+        </div>
+
+    </section>
+
+
+    <!-- FAULT INFORMATION -->
+    <section class="fault-panel">
+
+        <div>
+            <p class="small-title">FAULT DIAGNOSIS</p>
+
+            <h2 id="faultType">NO FAULT DETECTED</h2>
+
+            <p id="faultDescription">
+                All motor parameters are within safe operating limits.
+            </p>
+        </div>
+
+        <div class="severity">
+            <span>SEVERITY</span>
+            <strong id="severity">LOW</strong>
+        </div>
+
+    </section>
+
+
+    <!-- DOWNTIME -->
+    <section class="downtime">
+
+        <p class="small-title">DOWNTIME SAVED</p>
+
+        <div class="downtime-value">
+            <span id="downtime">4.5</span>
+            <small> HOURS</small>
+        </div>
+
+        <p>Estimated downtime prevented through early fault detection</p>
+
+    </section>
+
+
+    <!-- SERVICE CENTERS -->
+    <section class="service-section">
+
+        <div class="section-heading">
+            <p class="small-title">NEARBY MOTOR SERVICE CENTERS</p>
+        </div>
+
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <h3>ABC Motor Services</h3>
+                <p>Industrial Motor Repair</p>
+                <span>📍 2.4 km away</span>
+
+                <button>CONTACT</button>
+            </div>
+
+
+            <div class="service-card">
+                <h3>XYZ Electricals</h3>
+                <p>Motor Maintenance & Repair</p>
+                <span>📍 5.1 km away</span>
+
+                <button>CONTACT</button>
+            </div>
+
+
+            <div class="service-card">
+                <h3>PowerTech Services</h3>
+                <p>Industrial Electrical Services</p>
+                <span>📍 7.8 km away</span>
+
+                <button>CONTACT</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <span>PowerX Industrial Monitoring System</span>
+
+        <span>
+            Last Updated:
+            <strong id="lastUpdate">--:--:--</strong>
+        </span>
+    </footer>
+
+
+    <!-- Firebase connection -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+        import {
+            getDatabase,
+            ref,
+            set,
+            onValue
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+        /*
+         * POWERX FIREBASE CONFIGURATION
+         * Paste the EXACT firebaseConfig values from your Firebase
+         * "Add Firebase SDK -> Use a <script> tag" screen below.
+         */
+        const firebaseConfig = {
+            apiKey: "AIzaSyAnTwenoihwqutTslaUoMzyD3Bn013zKRE",
+            authDomain: "powerx-motor.firebaseapp.com",
+            databaseURL: "https://powerx-motor-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "powerx-motor",
+            storageBucket: "powerx-motor.firebasestorage.app",
+            messagingSenderId: "951280098949",
+            appId: "1:951280098949:web:9a2eab68e34f4842d413ec"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.PowerXFirebase = { db, ref, set, onValue };
+        window.dispatchEvent(new Event("firebase-ready"));
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
